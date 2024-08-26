@@ -1,8 +1,6 @@
 library weather;
 
 import 'dart:convert';
-
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:open_weather_map_api/src/models/serializers.dart';
@@ -17,7 +15,7 @@ abstract class Weather implements Built<Weather, WeatherBuilder> {
 
   Weather._();
 
-  factory Weather([updates(WeatherBuilder b)]) = _$Weather;
+  factory Weather([void Function(WeatherBuilder b) updates]) = _$Weather;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Weather.serializer, this));
