@@ -1,0 +1,8 @@
+/ *** 
+    Add the actual key values on to this file, then omit the trailing `.example` on this file. 
+    Remove this comment block after.
+*** /
+
+{
+    "OPEN_WEATHER_MAP_KEY": "XXXXXXX"
+}
