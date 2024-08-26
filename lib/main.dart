@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:open_weather_map_api/open_weather_map_api.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,12 +31,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late final OpenWeatherMapApiClient client;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void _runOperation() async {
+    final value = await client.getWeatherForecast(
+        latitude: 14.326664, longitude: 120.939868);
+    debugPrint('value: $value');
   }
 
   @override
@@ -46,6 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (openWeatherMapApiKey.isEmpty) {
       throw AssertionError('OPEN_WEATHER_MAP_KEY is not set');
     }
+    final owmc = OpenWeatherMapApiClient(apiKey: openWeatherMapApiKey);
+    client = owmc;
   }
 
   @override
@@ -55,22 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Hello world',
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _runOperation,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
