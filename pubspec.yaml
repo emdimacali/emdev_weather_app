@@ -11,16 +11,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  open_weather_map_api:
-    path: ./packages/open_weather_map_api
-
   cupertino_icons: ^1.0.6
+  flutter_bloc: ^8.1.6
+  hydrated_bloc: ^9.1.5
+  geolocator: ^13.0.1
+  weather_forecast_repository:
+    path: packages/weather_forecast_repository
+  path_provider: ^2.1.4
+  built_value: ^8.9.2
+  built_collection: ^5.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.12
+  built_value_generator: ^8.9.2
 
 flutter:
   uses-material-design: true
