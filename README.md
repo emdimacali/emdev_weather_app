@@ -12,6 +12,10 @@ Flutter version used for this app is: 3.24.1. There is a `.fvmrc` included in th
 
 This app can be run in both Android and iOS.
 
+## App Demo
+
+[Simple Weather App Demo](https://youtu.be/sm1whnJ1iNU)
+
 ## Getting Started
 
 ### Pre-requisite/s:
