@@ -1,16 +1,31 @@
 # emdev_weather_app
 
-A new Flutter project.
+A Flutter Weather App created using the following packages:
+
+- bloc
+- hydrated_bloc
+- dio
+- geolocator
+- built_value
+
+Flutter version used for this app is: 3.24.1. There is a `.fvmrc` included in this repo if you are using Flutter Version Manager.
+
+This app can be run in both Android and iOS.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Pre-requisite/s:
 
-A few resources to get you started if this is your first Flutter project:
+Before running the app, please ensure that you put your API key for the OpenWeatherMap on the `api-keys.json` file. An `api-keys.json.example` file is already in place and you can just remove the `.example` in the end and replace the placeholder `XXXXX` with the actual key.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Running the app:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### VSCode:
+
+If you are opening this in VSCode, there is already an included `.vscode/launch.json` which will already launch the app using the API keys in your `api-keys.json` file.
+
+#### Other IDEs:
+
+If you are not using VSCode, simply run the command below to still use the api keys in the file:
+
+`flutter run --dart-define-from-file=api-keys.json`

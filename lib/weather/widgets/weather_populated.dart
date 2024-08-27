@@ -97,7 +97,7 @@ class WeatherPopulated extends StatelessWidget {
                 // Upcoming forecasts in a List
                 Card(
                   child: SizedBox(
-                    height: 400,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     child: ListView.separated(
                         itemCount: weather.forecast.length - 1,
                         separatorBuilder: (context, index) => Padding(
