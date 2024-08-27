@@ -7,6 +7,10 @@ part of 'weather_state.dart';
 // **************************************************************************
 
 const WeatherStatus _$initial = const WeatherStatus._('initial');
+const WeatherStatus _$locationDisabled =
+    const WeatherStatus._('locationDisabled');
+const WeatherStatus _$permissionDenied =
+    const WeatherStatus._('permissionDenied');
 const WeatherStatus _$loading = const WeatherStatus._('loading');
 const WeatherStatus _$success = const WeatherStatus._('success');
 const WeatherStatus _$failure = const WeatherStatus._('failure');
@@ -15,6 +19,10 @@ WeatherStatus _$valueOf(String name) {
   switch (name) {
     case 'initial':
       return _$initial;
+    case 'locationDisabled':
+      return _$locationDisabled;
+    case 'permissionDenied':
+      return _$permissionDenied;
     case 'loading':
       return _$loading;
     case 'success':
@@ -29,6 +37,8 @@ WeatherStatus _$valueOf(String name) {
 final BuiltSet<WeatherStatus> _$values =
     new BuiltSet<WeatherStatus>(const <WeatherStatus>[
   _$initial,
+  _$locationDisabled,
+  _$permissionDenied,
   _$loading,
   _$success,
   _$failure,

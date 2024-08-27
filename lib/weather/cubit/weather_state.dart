@@ -12,6 +12,8 @@ part 'weather_state.g.dart';
 
 class WeatherStatus extends EnumClass {
   static const WeatherStatus initial = _$initial;
+  static const WeatherStatus locationDisabled = _$locationDisabled;
+  static const WeatherStatus permissionDenied = _$permissionDenied;
   static const WeatherStatus loading = _$loading;
   static const WeatherStatus success = _$success;
   static const WeatherStatus failure = _$failure;
@@ -26,6 +28,8 @@ class WeatherStatus extends EnumClass {
 
 extension WeatherStatusX on WeatherStatus {
   bool get isInitial => this == WeatherStatus.initial;
+  bool get isLocationDisabled => this == WeatherStatus.locationDisabled;
+  bool get isPermissionDenied => this == WeatherStatus.permissionDenied;
   bool get isLoading => this == WeatherStatus.loading;
   bool get isSuccess => this == WeatherStatus.success;
   bool get isFailure => this == WeatherStatus.failure;

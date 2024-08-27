@@ -22,7 +22,8 @@ class WeatherForecastRepository {
     // Traverse each item in list, need to check
     final forecast = list.map((wf) {
       final weatherInfo = WeatherInfo((b) => b
-        ..date = DateTime.fromMillisecondsSinceEpoch(wf.date)
+        ..date =
+            DateTime.fromMillisecondsSinceEpoch(wf.date * 1000, isUtc: true)
         ..temp = wf.main.temp
         ..feelsLike = wf.main.feelsLike
         ..humidity = wf.main.humidity

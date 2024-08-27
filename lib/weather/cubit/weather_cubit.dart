@@ -3,6 +3,7 @@ import 'package:emdev_weather_app/weather/models/weather.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:weather_forecast_repository/weather_forecast_repository.dart'
     hide Weather;
+import 'package:geolocator/geolocator.dart';
 
 import 'weather_state.dart';
 
@@ -26,14 +27,43 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
         as Map<String, dynamic>;
   }
 
-  Future<void> fetchWeatherForecast(double latitude, double longitude) async {
+  Future<Position> _getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if (!serviceEnabled) {
+      emit(state
+          .rebuild((b) => b..weatherStatus = WeatherStatus.locationDisabled));
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        emit(state
+            .rebuild((b) => b..weatherStatus = WeatherStatus.permissionDenied));
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      emit(state
+          .rebuild((b) => b..weatherStatus = WeatherStatus.permissionDenied));
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
+  Future<void> fetchWeatherForecast() async {
     // This is where we call the weather forecast repository
     emit(state.rebuild((b) => b..weatherStatus = WeatherStatus.loading));
 
     try {
-      final weatherForecast = await _weatherForecastRepository
-          .getWeatherForecast(latitude: latitude, longitude: longitude);
-      print('weatehrForecast: $weatherForecast');
+      final position = await _getLocation();
+      final weatherForecast =
+          await _weatherForecastRepository.getWeatherForecast(
+              latitude: position.latitude, longitude: position.longitude);
 
       final weather = Weather.fromRepository(weatherForecast);
       print('WEATHER : $weather');

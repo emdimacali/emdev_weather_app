@@ -44,7 +44,7 @@ abstract class WeatherInfo implements Built<WeatherInfo, WeatherInfoBuilder> {
   static WeatherInfo fromRepository(
       weather_forecast_repository.WeatherInfo weather) {
     return WeatherInfo((b) => b
-      ..date = weather.date.toUtc()
+      ..date = weather.date
       ..temp = weather.temp
       ..feelsLike = weather.feelsLike
       ..humidity = weather.humidity
