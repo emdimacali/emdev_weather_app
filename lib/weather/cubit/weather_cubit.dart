@@ -27,7 +27,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
         as Map<String, dynamic>;
   }
 
-  Future<Position> _getLocation() async {
+  Future<Position?> _getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -37,6 +37,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
     if (!serviceEnabled) {
       emit(state
           .rebuild((b) => b..weatherStatus = WeatherStatus.locationDisabled));
+      return null;
     }
 
     permission = await Geolocator.checkPermission();
@@ -45,12 +46,14 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
       if (permission == LocationPermission.denied) {
         emit(state
             .rebuild((b) => b..weatherStatus = WeatherStatus.permissionDenied));
+        return null;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       emit(state
           .rebuild((b) => b..weatherStatus = WeatherStatus.permissionDenied));
+      return null;
     }
     return await Geolocator.getCurrentPosition();
   }
@@ -61,12 +64,16 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
 
     try {
       final position = await _getLocation();
+
+      if (position == null) {
+        return;
+      }
+
       final weatherForecast =
           await _weatherForecastRepository.getWeatherForecast(
               latitude: position.latitude, longitude: position.longitude);
 
       final weather = Weather.fromRepository(weatherForecast);
-      print('WEATHER : $weather');
 
       emit(state.rebuild((b) => b
         ..weather.replace(weather)

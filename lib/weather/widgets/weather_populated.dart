@@ -137,7 +137,7 @@ class WeatherPopulated extends StatelessWidget {
                                       Row(
                                         children: [
                                           const Icon(Icons.water_drop),
-                                          Text('H: ${forecastItem.humidity}%'),
+                                          Text('${forecastItem.humidity}%'),
                                         ],
                                       ),
                                       Row(

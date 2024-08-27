@@ -9,17 +9,6 @@ class MockOpenWeatherMapApiClient extends Mock
 
 void main() {
   group('WeatherForecastRepository', () {
-    late open_weather_map_api.OpenWeatherMapApiClient weatherApiClient;
-    late WeatherForecastRepository weatherForecastRepository;
-
-    setUp(() {
-      weatherApiClient = MockOpenWeatherMapApiClient();
-      weatherForecastRepository = WeatherForecastRepository(
-        weatherApiClient: weatherApiClient,
-        apiKey: 'xxxx',
-      );
-    });
-
     group('constructor', () {
       test('instantiates internal weather api client when not injected', () {
         expect(
